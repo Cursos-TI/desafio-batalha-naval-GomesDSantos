@@ -9,9 +9,10 @@ int tabuleiroF(void);
 int main(void) { //FUNÇÃO MAIN / APRESENTAÇÃO DO TABULEIRO E NAVIOS
 
     printf("=========BATALHA NAVAL========\n");
-    barcoL(3,3,1); //EXEMPLO BARCO 1
-    barcoL(10,8,0); //EXEMPLO BARCO 2
-    barcoL(6,7,1); //EXEMPLO BARCO 3
+    barcoL(2,2,0); //EXEMPLO BARCO 1
+    barcoL(10,8,1); //EXEMPLO BARCO 2
+    barcoL(3,7,2); //EXEMPLO BARCO 3
+    barcoL(8,5,3); //EXEMPLO BARCO 4
     tabuleiroF();
     printf("=========BATALHA NAVAL========\n");
 
@@ -21,8 +22,8 @@ int main(void) { //FUNÇÃO MAIN / APRESENTAÇÃO DO TABULEIRO E NAVIOS
 // FUNÇÃO PARA A CONSTRUÇÃO DO TABULEIRO
 int tabuleiroF(void) {
 
-    for (int contX = 1; contX <= 10; contX++) {
-        for (int contY = 1; contY <= 10; contY++) {
+    for (int contY = 1; contY <= 10; contY++) {
+        for (int contX = 1; contX <= 10; contX++) {
             printf(" %0.f ", tabuleiro[contX][contY]);
         }
         printf("\n");
@@ -31,28 +32,44 @@ int tabuleiroF(void) {
 }
 
 //FUNÇÃO PARA A CONSTRUÇÃO DO BARCO
-int barcoL(int posicX, int posicY, int posicVH) { //0 orientacao vertical, 1 orientacao horizontal
+int barcoL(int posicX, int posicY, int posicVH) { //0=vertical, 1=horizontal, 2=diagonal direita, 3=diagonal esquerda
 
     switch (posicVH) {
         int cont;
         case 0:
             cont = 1;
-            while (cont <= 3) {
-                cont++;
-                tabuleiro[posicX][posicY];
-                tabuleiro[posicX][posicY++] = 3;
-            }
-            break;
+        while (cont <= 3) {
+            cont++;
+            tabuleiro[posicX][posicY] += 3;
+            tabuleiro[posicX++][posicY];
+        }
+        break;
         case 1:
             cont = 1;
-            while (cont <= 3) {
-                cont++;
-                tabuleiro[posicX][posicY];
-                tabuleiro[posicX++][posicY] = 3;
-            }
-            break;
+        while (cont <= 3) {
+            cont++;
+            tabuleiro[posicX][posicY] += 3;
+            tabuleiro[posicX][posicY++];
+        }
+        break;
+        case 2:
+            cont = 1;
+        while (cont <= 3) {
+            cont++;
+            tabuleiro[posicX][posicY] += 3;
+            tabuleiro[posicX++][posicY++];
+        }
+        break;
+        case 3:
+            cont = 1;
+        while (cont <=3) {
+            cont++;
+            tabuleiro[posicX][posicY] += 3;
+            tabuleiro[posicX--][posicY++];
+        }
+        break;
         default:
-            printf("orientacao invalida");
+            printf("\nOrientacao invalida\n");
     }
     return 0;
 }
